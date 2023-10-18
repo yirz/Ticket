@@ -55,7 +55,7 @@ class TicketMachineTest {
 	}
 
 	@Test
-		// S6 :  le montant collecté est mis à jour quand on imprime un ticket (pas avant)
+		// S6 :  le montabingnt collecté est mis à jour quand on imprime un ticket (pas avant)
 	void MoneyColectUpdate(){
 		machine.insertMoney(100);
 		assertEquals(0,machine.getTotal(),"le montant collecté est mis à jour avant l'impression du ticket");
