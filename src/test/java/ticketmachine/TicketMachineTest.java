@@ -60,7 +60,7 @@ class TicketMachineTest {
 		machine.insertMoney(100);
 		assertEquals(0,machine.getTotal(),"le montant collecté est mis à jour avant l'impression du ticket");
 		machine.printTicket();
-		assertEquals(100,machine.getTotal(),"le montant collecté n'est pas mis à jour");
+		assertEquals(100,machine.getTotal(),"le montant collecté n'est pas misà jour");
 
 	}
 
