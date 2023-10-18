@@ -26,8 +26,43 @@ class TicketMachineTest {
 	void insertMoneyChangesBalance() {
 		machine.insertMoney(10);
 		machine.insertMoney(20);
-                // Les montants ont été correctement additionnés  
+
 		assertEquals(10 + 20, machine.getBalance(), "La balance n'est pas correctement mise à jour");              
 	}
+	@Test
+// S3 : Le ticket n'est pas imprimé si le montant inséré est insufisant
+	void dontPrintTicketIfAmountNotEnought(){
+		machine.insertMoney(10);
+
+		assertEquals(false,machine.printTicket(),"montant inséré insufisant");
+	}
+
+	@Test
+		// S4 :  Le ticket est imprimé si le montant inséré est sufisantt
+	void printTicketIfAmountEnought(){
+		machine.insertMoney(60);
+
+		assertEquals(true,machine.printTicket(),"montant inséré suffisant");
+	}
+
+	@Test
+		// S5 :  Si un ticket est imprimé, on enlève son prix de la balance
+	void ticketBalance(){
+		machine.insertMoney(100);
+		machine.printTicket();
+
+		assertEquals(100-PRICE,machine.getBalance(),"la balance n'est pas décrémentée");
+	}
+
+	@Test
+		// S6 :  le montant collecté est mis à jour quand on imprime un ticket (pas avant)
+	void MoneyColectUpdate(){
+		machine.insertMoney(100);
+		assertEquals(0,machine.getTotal(),"le montant collecté est mis à jour avant l'impression du ticket");
+		machine.printTicket();
+		assertEquals(100,machine.getTotal(),"le montant collecté n'est pas mis à jour");
+
+	}
+
 
 }
