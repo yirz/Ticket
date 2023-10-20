@@ -63,6 +63,53 @@ class TicketMachineTest {
 		assertEquals(100,machine.getTotal(),"le montant collecté n'est pas misà jour");
 
 	}
+	@Test
+		// S7 : rendre correctement la monnaie
+	void GiveBackChange(){
+		machine.insertMoney(100);
+		machine.printTicket();
+
+		assertEquals(100-PRICE,machine.refund(),"la fonction ne rend pas la monnaie");
+
+	}
+
+
+	@Test
+		// S8 :  remet la balance à zéro
+	void balance0(){
+		machine.insertMoney(80);
+		machine.refund();
+
+		assertEquals(0,machine.getBalance(),"la fonction  ne remet pas la balance à zéro");
+
+	}
+
+
+	@Test
+		// S9 :  on ne peut pas insérer un montant négatif
+	void InsertnegativeValues(){
+		try{
+			machine.insertMoney(-80);
+			fail("doit lever une exception");
+		}
+		catch (IllegalArgumentException e){
+
+		}
+	}
+
+
+	@Test
+		// S10 :  on ne peut pas créer de machine qui délivre des tickets dont le prix est négatif
+	void createMachineTicketNegative(){
+		try{
+			TicketMachine machine = new TicketMachine(-15);
+			fail("doit lever une exception");
+		}
+		catch (IllegalArgumentException e){
+
+		}
+	}
+
 
 
 }
